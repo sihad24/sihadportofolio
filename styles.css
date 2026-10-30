@@ -2352,3 +2352,19 @@ body.cert-locked .modern-gallery {
 .cert-gate-notes .text-white {
     color: var(--mint);
 }
+
+.cert-file-input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--muted);
+}
+
+.cert-file-input::file-selector-button {
+    background: var(--accent);
+    border: none;
+    color: #07111f;
+    font-weight: 700;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    margin-right: 0.75rem;
+}

@@ -321,17 +321,44 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    /* ---------- Gate akses sertifikat: sandi admin & kode aktivasi top-up ---------- */
+    /* ---------- Gate akses sertifikat: sandi admin, kode aktivasi top-up, dan enkripsi media ---------- */
     const certGateConfig = {
         adminHash: "bcca50326526a2fe41b49cf0cf4a1e56f2d5aaf42eddb7ff1c0dd90f24b23261",
-        activationHashes: [
-            "fbab74d95a76f0a3bd844022994b934614a1b5681a8d084040168fbf7f80c8f1",
-            "c76a9b2d962c6ef8867d489d7d9b94914b21fe54562f81d274aa17733950441b",
-            "2ce93642d2a379fccc013cb8308ce967e86e8535c29a23018adb936419482a80",
-            "ffdcdb0e1d195cc282c93a6c8842484161c0365cf94d6fa2574d1f0878528ae2",
-            "88b5f1d5b42760a081ab87bfd1ccdb5a3aa9482e90871126b5ea27aff15b191b"
-        ],
-        storageKey: "shihad_cert_access"
+        media: {
+            admin: {
+                salt: "LH5ofY4wOVueZvI0JDjxvg==",
+                wrapped: "LH5ofY4wOVueZvI0JDjxvhc3DGQRP/OB5rRTl7KtyOyIi+ZqGKm+5dxuFU/UVf74s0QIPDWit7wTKiMnA6t8LrKX6NM+Zfa1LUdIFg=="
+            },
+            codes: {
+                "d43096877d5feb64d0a8ad51cd671eb987b737b12a5a3c7764ebb59c6bd036e3": {
+                    salt: "SgQ6e6BWIb37nqd0j0FGwA==",
+                    wrapped: "SgQ6e6BWIb37nqd0j0FGwLK8PgLMmFlUbxj2aR1R9sLXqKxUevzkmnXuwxSlGMrCqBu0aFwMAAO8CkCKgdkHEhs2ESpcnMqBNXETIQ=="
+                },
+                "fbab74d95a76f0a3bd844022994b934614a1b5681a8d084040168fbf7f80c8f1": {
+                    salt: "yf+KKZg4CUdGinRZj4ZkcQ==",
+                    wrapped: "yf+KKZg4CUdGinRZj4ZkccP/thKtW9uLQEXQxStYsClOvIc1VzhKo599ENTWvSBLFK2fs2SJ6uTql62rcHFrj2S+hNVwaa2WwUk5lA=="
+                },
+                "c76a9b2d962c6ef8867d489d7d9b94914b21fe54562f81d274aa17733950441b": {
+                    salt: "Slsq/T4we1NwtGU58/YCQA==",
+                    wrapped: "Slsq/T4we1NwtGU58/YCQKF2DOMjiTQohOi1KxTZm9/kFEtXwYBhiIsYzaYLL8/axuspBRZJXHM+PRuECdNgNe2ZKxSRamFuHk+ikg=="
+                },
+                "2ce93642d2a379fccc013cb8308ce967e86e8535c29a23018adb936419482a80": {
+                    salt: "vdRD24r0aPvJTcr38qCIFw==",
+                    wrapped: "vdRD24r0aPvJTcr38qCIF1lGiu51xdB9OwXemDJlPC80Vu66hJOMZv60JvcJ76T/ZeDUUFEI9R/hlA1twG7VyPownxMYSAnKEgWDkA=="
+                },
+                "ffdcdb0e1d195cc282c93a6c8842484161c0365cf94d6fa2574d1f0878528ae2": {
+                    salt: "MzFqxOMDHFvgzvLFPlug6g==",
+                    wrapped: "MzFqxOMDHFvgzvLFPlug6qa53HO8/LolbqMVyhjNKE+r83ieDTHEBNRyUrBvow1+K3klEBJNcnJ/Znj8RDaZ4PwK1ss6GcyaOQmzzQ=="
+                },
+                "88b5f1d5b42760a081ab87bfd1ccdb5a3aa9482e90871126b5ea27aff15b191b": {
+                    salt: "5xSZsyAA4DZCwf9uq4PmPg==",
+                    wrapped: "5xSZsyAA4DZCwf9uq4PmPp0Kz+RCw2U9+NduXlq3Mm91PGeTFGoPK2BNE+mH/x7jvWaVBwCnIl2ZLv4/Klcg5Fl6r+HHrGn5pbemgg=="
+                }
+            }
+        },
+        storageKey: "shihad_cert_access",
+        mediaKeyStoreKey: "shihad_cert_media",
+        deriveIterations: 250000
     };
 
     const readCertAccess = () => {
@@ -363,7 +390,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    const hasCertAccess = () => !!readCertAccess();
+    const hasCertAccess = () => !!readCertAccess() && !!readMediaKey();
 
     const sha256Hex = async text => {
         if (!window.crypto || !window.crypto.subtle) {
@@ -373,10 +400,101 @@ document.addEventListener("DOMContentLoaded", () => {
         return Array.from(new Uint8Array(digest)).map(byte => byte.toString(16).padStart(2, "0")).join("");
     };
 
-    const hydrateCertImages = () => {
-        document.querySelectorAll(".cert-thumb[data-src]").forEach(img => {
-            img.src = img.dataset.src;
-            img.removeAttribute("data-src");
+    const bytesToB64 = bytes => {
+        let binary = "";
+        const chunk = 0x8000;
+        for (let index = 0; index < bytes.length; index += chunk) {
+            binary += String.fromCharCode.apply(null, bytes.subarray(index, index + chunk));
+        }
+        return btoa(binary);
+    };
+
+    const b64ToBytes = value => Uint8Array.from(atob(value), char => char.charCodeAt(0));
+
+    const readMediaKey = () => {
+        try {
+            return window.localStorage.getItem(certGateConfig.mediaKeyStoreKey);
+        } catch (error) {
+            return null;
+        }
+    };
+
+    const storeMediaKey = value => {
+        try {
+            window.localStorage.setItem(certGateConfig.mediaKeyStoreKey, value);
+        } catch (error) {
+            /* penyimpanan tidak tersedia, abaikan */
+        }
+    };
+
+    const clearMediaKey = () => {
+        try {
+            window.localStorage.removeItem(certGateConfig.mediaKeyStoreKey);
+        } catch (error) {
+            /* penyimpanan tidak tersedia, abaikan */
+        }
+    };
+
+    const deriveMediaKey = async (credential, saltBytes) => {
+        const subtle = window.crypto.subtle;
+        const material = await subtle.importKey("raw", new TextEncoder().encode(credential), "PBKDF2", false, ["deriveKey"]);
+        return subtle.deriveKey(
+            { name: "PBKDF2", salt: saltBytes, iterations: certGateConfig.deriveIterations, hash: "SHA-256" },
+            material,
+            { name: "AES-GCM", length: 256 },
+            false,
+            ["decrypt"]
+        );
+    };
+
+    const unwrapMediaKey = async (credential, saltB64, wrappedB64) => {
+        const bundle = b64ToBytes(wrappedB64);
+        const kek = await deriveMediaKey(credential, bundle.slice(0, 16));
+        const plain = await window.crypto.subtle.decrypt(
+            { name: "AES-GCM", iv: bundle.slice(16, 28) },
+            kek,
+            bundle.slice(28)
+        );
+        return bytesToB64(new Uint8Array(plain));
+    };
+
+    const CERT_MIME = { jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png", webp: "image/webp" };
+
+    const decryptCertFile = async (encPath, mediaKeyB64) => {
+        const response = await fetch(encPath);
+        if (!response.ok) throw new Error("Gagal memuat file terenkripsi: " + encPath);
+        const bundle = new Uint8Array(await response.arrayBuffer());
+        const kek = await window.crypto.subtle.importKey("raw", b64ToBytes(mediaKeyB64), { name: "AES-GCM" }, false, ["decrypt"]);
+        const plain = await window.crypto.subtle.decrypt(
+            { name: "AES-GCM", iv: bundle.slice(0, 12) },
+            kek,
+            bundle.slice(12)
+        );
+        const ext = (encPath.replace(/\.enc$/i, "").split(".").pop() || "jpg").toLowerCase();
+        const blob = new Blob([plain], { type: CERT_MIME[ext] || "image/jpeg" });
+        return URL.createObjectURL(blob);
+    };
+
+    const toCertFilename = title => {
+        const slug = (title || "sertifikat").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+        return (slug || "sertifikat").slice(0, 60);
+    };
+
+    const hydrateCertMedia = () => {
+        const mediaKey = readMediaKey();
+        if (!mediaKey) return;
+        document.querySelectorAll(".cert-thumb[data-enc]").forEach(img => {
+            if (img.dataset.blob) return;
+            decryptCertFile(img.dataset.enc, mediaKey).then(url => {
+                img.src = url;
+                img.dataset.blob = url;
+                const downloadAnchor = img.closest(".cert-card-modern")?.querySelector("a[download]");
+                if (downloadAnchor) {
+                    downloadAnchor.href = url;
+                    const ext = (img.dataset.enc.replace(/\.enc$/i, "").split(".").pop() || "jpg").toLowerCase();
+                    downloadAnchor.download = `${toCertFilename(img.dataset.title)}.${ext}`;
+                }
+            }).catch(() => img.classList.add("d-none"));
         });
     };
 
@@ -385,7 +503,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.toggle("cert-locked", !unlocked);
         document.body.classList.toggle("cert-unlocked", unlocked);
         document.getElementById("certRelockBtn")?.classList.toggle("d-none", !unlocked);
-        if (unlocked) hydrateCertImages();
+        if (unlocked) hydrateCertMedia();
         return unlocked;
     };
 
@@ -431,6 +549,12 @@ document.addEventListener("DOMContentLoaded", () => {
             try {
                 const hash = await sha256Hex(passwordInput.value);
                 if (hash === certGateConfig.adminHash) {
+                    try {
+                        storeMediaKey(await unwrapMediaKey(passwordInput.value, certGateConfig.media.admin.salt, certGateConfig.media.admin.wrapped));
+                    } catch (innerError) {
+                        showFeedback(passwordFeedback, "Kunci media tidak cocok — bungkus kunci di script.js perlu diperbarui.", false);
+                        return;
+                    }
                     writeCertAccess({ type: "admin", at: new Date().toISOString() });
                     passwordInput.value = "";
                     showFeedback(passwordFeedback, "", false);
@@ -465,7 +589,14 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             try {
                 const hash = await sha256Hex(value);
-                if (certGateConfig.activationHashes.includes(hash)) {
+                const wrapEntry = certGateConfig.media.codes[hash];
+                if (wrapEntry) {
+                    try {
+                        storeMediaKey(await unwrapMediaKey(value, wrapEntry.salt, wrapEntry.wrapped));
+                    } catch (innerError) {
+                        showFeedback(activationFeedback, "Kunci media tidak cocok — bungkus kunci di script.js perlu diperbarui.", false);
+                        return;
+                    }
                     writeCertAccess({ type: "paid", at: new Date().toISOString() });
                     activationInput.value = "";
                     showFeedback(activationFeedback, "", false);
@@ -490,6 +621,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!hasCertAccess()) return;
             if (!window.confirm("Kunci lagi akses sertifikat di perangkat ini?")) return;
             clearCertAccess();
+            clearMediaKey();
             applyCertLockState();
             showToast("Akses sertifikat di perangkat ini dikunci kembali.");
         });
@@ -526,17 +658,18 @@ function openCertFromElement(cardEl) {
     if (!cardEl) return;
     var img = cardEl.querySelector('.cert-thumb');
     if (!img) return;
-    var src = img.getAttribute('src');
+    var src = img.dataset.blob || img.getAttribute('src');
     var title = img.dataset.title || img.alt || '';
     var organizer = img.dataset.organizer || '';
     var year = img.dataset.year || '';
     var verify = img.dataset.verify || '#';
+    var ext = ((img.dataset.enc || '').replace(/\.enc$/i, '').split('.').pop() || 'jpg').toLowerCase();
 
-    openCert(src, title, organizer, year, verify);
+    openCert(src, title, organizer, year, verify, `${toCertFilename(title)}.${ext}`);
 }
 
 // openCert now accepts metadata and populates lightbox controls
-function openCert(src, title, organizer, year, verify) {
+function openCert(src, title, organizer, year, verify, filename) {
     if (!hasCertAccess()) {
         showToast("Sertifikat terkunci: masuk dengan sandi atau top-up dahulu.");
         return;
@@ -555,6 +688,9 @@ function openCert(src, title, organizer, year, verify) {
     modalImage.src = src || '';
     modalImage.classList.remove('zoomed');
     downloadBtn.href = src || '#';
+    if (filename) {
+        downloadBtn.download = filename;
+    }
     openBtn.href = src || '#';
 
     // show bootstrap modal

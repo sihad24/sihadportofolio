@@ -17,52 +17,149 @@
     <div id="certGate" class="cert-gate cert-gate-style mt-5">
         <div class="cert-gate-icon"><i class="bi bi-shield-lock-fill"></i></div>
         <h1 class="section-title cert-gate-title mb-2">Generator Kode Aktivasi</h1>
-        <p class="cert-gate-desc">Halaman ini hanya untuk pemilik portofolio. Buat kode baru setelah pembayaran Rp 50.000 diterima, lalu berikan kode tersebut ke pembeli dan tambahkan hash-nya ke <span class="text-white">activationHashes</span> di <span class="text-white">script.js</span>.</p>
-        <div class="d-grid gap-3 mx-auto" style="max-width: 420px;">
+        <p class="cert-gate-desc">Halaman ini hanya untuk pemilik portofolio. Setelah pembayaran Rp 50.000 diterima, generate kode + bungkus kunci master di sini, lalu tempel hasilnya ke <span class="text-white">certGateConfig.media.codes</span> di <span class="text-white">script.js</span>.</p>
+
+        <div class="cert-payment-box text-start mx-auto d-grid gap-2" style="max-width: 520px;">
+            <p class="small text-muted mb-0">1. Muat file kunci master (<span class="cert-file-name">kunci-master-sertifikat-sihad.txt</span> &mdash; ada di folder Documents kamu, tidak disertakan saat deploy)</p>
+            <input type="file" id="keyFile" class="form-control cert-file-input" accept=".txt">
+        </div>
+
+        <div class="d-grid gap-3 mx-auto mt-3 cert-generator-output" style="max-width: 520px;">
             <button type="button" id="genBtn" class="btn btn-primary py-2 fw-bold">Generate Kode Baru</button>
             <div class="cert-payment-box text-start">
-                <p class="small text-muted mb-1">Kode</p>
+                <p class="small text-muted mb-1">Kode (berikan ke pembeli)</p>
                 <div class="d-flex align-items-center justify-content-between gap-2">
                     <span id="genCode" class="cert-code-value text-white fw-bold">-belum ada-</span>
                     <button type="button" class="btn btn-sm btn-outline-light cert-copy-btn" data-target="genCode" aria-label="Salin kode">Salin</button>
                 </div>
             </div>
             <div class="cert-payment-box text-start">
-                <p class="small text-muted mb-1">Hash SHA-256 (dipasang di script.js)</p>
+                <p class="small text-muted mb-1">Pakai untuk dipasang di script.js</p>
                 <div class="d-flex align-items-center justify-content-between gap-2">
-                    <span id="genHash" class="cert-code-value cert-code-hash text-white">-belum ada-</span>
-                    <button type="button" class="btn btn-sm btn-outline-light cert-copy-btn" data-target="genHash" aria-label="Salin hash">Salin</button>
+                    <span id="genSnippet" class="cert-code-value cert-code-hash text-white">-belum ada-</span>
+                    <button type="button" class="btn btn-sm btn-outline-light cert-copy-btn" data-target="genSnippet" aria-label="Salin potongan kode">Salin</button>
                 </div>
             </div>
         </div>
+
+        <div class="cert-payment-box text-start mx-auto d-grid gap-2 mt-3" style="max-width: 520px;">
+            <p class="small text-muted mb-0">Bungkus ulang sandi admin (misal sandi berubah)</p>
+            <input type="password" id="adminPassword" class="form-control access-input" placeholder="Ketik sandi admin baru" autocomplete="new-password">
+            <button type="button" id="rewrapBtn" class="btn btn-outline-light">Bungkus Ulang Sandi Admin</button>
+            <div class="cert-payment-box text-start bg-transparent p-2">
+                <p class="small text-muted mb-1">Potongan untuk certGateConfig.media:</p>
+                <div class="d-flex align-items-center justify-content-between gap-2">
+                    <span id="rewrapSnippet" class="cert-code-value cert-code-hash text-white">-belum ada-</span>
+                    <button type="button" class="btn btn-sm btn-outline-light cert-copy-btn" data-target="rewrapSnippet" aria-label="Salin potongan kode">Salin</button>
+                </div>
+            </div>
+        </div>
+
         <div class="text-start mx-auto mt-4 cert-gate-notes">
             <p class="fw-bold text-white mb-2">Cara pakai</p>
             <ol class="text-muted small ps-3 mb-0">
                 <li>Pastikan pembayaran Rp 50.000 sudah diterima.</li>
-                <li>Klik "Generate Kode Baru" lalu salin kodenya dan berikan ke pembeli.</li>
-                <li>Tambahkan hash-nya ke array <span class="text-white">activationHashes</span> di <span class="text-white">script.js</span>.</li>
-                <li>Catat kode di file privat di luar folder situs. Jangan ikut sertakan file tersebut saat upload/deploy.</li>
+                <li>Muat file kunci master, klik "Generate Kode Baru", salin kodenya dan berikan ke pembeli.</li>
+                <li>Tempel potongan kode dari jendela "Pakai untuk dipasang di script.js" ke dalam <span class="text-white">codes</span> (map hash &rarr; bungkus kunci) di <span class="text-white">script.js</span>.</li>
+                <li>Catat kode plaintext di file privat di luar folder situs agar kode bisa keluar daftar. Jangan ikut sertakan file tersebut saat upload/deploy.</li>
+                <li>Kode habis atau sandi berubah? Ulangi langkah 2&ndash;3 di atas.</li>
             </ol>
         </div>
     </div>
 
     <script>
         const codeOutput = document.getElementById("genCode");
-        const hashOutput = document.getElementById("genHash");
+        const snippetOutput = document.getElementById("genSnippet");
+        const rewrapSnippet = document.getElementById("rewrapSnippet");
+        const keyFileInput = document.getElementById("keyFile");
+        const rewrapButton = document.getElementById("rewrapBtn");
         const ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+        const DERIVE_ITERATIONS = 250000;
+
+        const bytesToB64 = bytes => {
+            let binary = "";
+            const chunk = 0x8000;
+            for (let index = 0; index < bytes.length; index += chunk) {
+                binary += String.fromCharCode.apply(null, bytes.subarray(index, index + chunk));
+            }
+            return btoa(binary);
+        };
+
+        const deriveKek = async (credential, saltBytes, usages) => {
+            const subtle = window.crypto.subtle;
+            const material = await subtle.importKey("raw", new TextEncoder().encode(credential), "PBKDF2", false, ["deriveKey"]);
+            return subtle.deriveKey(
+                { name: "PBKDF2", salt: saltBytes, iterations: DERIVE_ITERATIONS, hash: "SHA-256" },
+                material,
+                { name: "AES-GCM", length: 256 },
+                false,
+                usages
+            );
+        };
+
+        const sha256Hex = async text => {
+            const digest = await window.crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+            return Array.from(new Uint8Array(digest)).map(byte => byte.toString(16).padStart(2, "0")).join("");
+        };
+
+        const buildWrap = async (credential, masterKeyBytes) => {
+            const salt = window.crypto.getRandomValues(new Uint8Array(16));
+            const iv = window.crypto.getRandomValues(new Uint8Array(12));
+            const kek = await deriveKek(credential, salt, ["encrypt"]);
+            const cipherText = await window.crypto.subtle.encrypt({ name: "AES-GCM", iv }, kek, masterKeyBytes);
+            return {
+                salt: bytesToB64(salt),
+                wrapped: bytesToB64(new Uint8Array([...salt, ...iv, ...new Uint8Array(cipherText)])),
+                hash: await sha256Hex(credential)
+            };
+        };
+
+        let masterKeyBytes = null;
+        keyFileInput?.addEventListener("change", async () => {
+            const file = keyFileInput.files && keyFileInput.files[0];
+            if (!file) return;
+            try {
+                const text = (await file.text()).trim();
+                const bytes = Uint8Array.from(atob(text), char => char.charCodeAt(0));
+                if (bytes.length !== 32) throw new Error("Panjang tidak 32 byte");
+                masterKeyBytes = bytes;
+                snippetOutput.textContent = "-kunci siap, klik Generate Kode Baru-";
+                rewrapSnippet.textContent = "-kunci siap, isi sandi lalu klik Bungkus Ulang-";
+            } catch (error) {
+                masterKeyBytes = null;
+                rewrapSnippet.textContent = "File kunci tidak valid";
+            }
+        });
 
         document.getElementById("genBtn").addEventListener("click", async () => {
             if (!window.crypto || !window.crypto.subtle) {
-                hashOutput.textContent = "Buka lewat http://localhost atau https:// dulu.";
+                snippetOutput.textContent = "Buka lewat http://localhost atau https:// dulu.";
                 return;
             }
-            const bytes = new Uint8Array(8);
-            window.crypto.getRandomValues(bytes);
+            if (!masterKeyBytes) {
+                snippetOutput.textContent = "Muat file kunci master dulu di atas.";
+                return;
+            }
+            const bytes = window.crypto.getRandomValues(new Uint8Array(8));
             const code = "SIHAD-" + Array.from(bytes, byte => ALPHABET[byte % ALPHABET.length]).join("");
-            const digest = await window.crypto.subtle.digest("SHA-256", new TextEncoder().encode(code));
-            const hash = Array.from(new Uint8Array(digest)).map(byte => byte.toString(16).padStart(2, "0")).join("");
+            const entry = await buildWrap(code, masterKeyBytes);
             codeOutput.textContent = code;
-            hashOutput.textContent = hash;
+            snippetOutput.textContent = `${entry.hash}: {\n                    salt: "${entry.salt}",\n                    wrapped: "${entry.wrapped}"\n                }`;
+        });
+
+        rewrapButton?.addEventListener("click", async () => {
+            const password = document.getElementById("adminPassword").value;
+            if (!masterKeyBytes) {
+                rewrapSnippet.textContent = "Muat file kunci master dulu di atas.";
+                return;
+            }
+            if (!password) {
+                rewrapSnippet.textContent = "Isi sandi admin dulu.";
+                return;
+            }
+            const entry = await buildWrap(password, masterKeyBytes);
+            rewrapSnippet.textContent = `admin: {\n                salt: "${entry.salt}",\n                wrapped: "${entry.wrapped}"\n            }`;
+            rewrapSnippet.classList.add("text-warning");
         });
 
         document.querySelectorAll(".cert-copy-btn").forEach(button => {
