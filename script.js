@@ -248,7 +248,18 @@ document.addEventListener("DOMContentLoaded", () => {
     copyEmailButton?.addEventListener("click", () => handleCopyEmail(copyEmailButton));
     copyEmailButtons.forEach(btn => btn.addEventListener("click", () => handleCopyEmail(btn)));
 
-    downloadCvButton?.addEventListener("click", () => {
+    downloadCvButton?.addEventListener("click", async () => {
+        const downloadBlob = (blob, filename) => {
+            const fileUrl = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+
+            link.href = fileUrl;
+            link.download = filename;
+            link.click();
+
+            URL.revokeObjectURL(fileUrl);
+        };
+
         const cvText = [
             "CV - SIHAD",
             "",
@@ -279,16 +290,16 @@ document.addEventListener("DOMContentLoaded", () => {
             "File ini adalah ringkasan CV sederhana dari halaman portfolio Sihad."
         ].join("\n");
 
-        const blob = new Blob([cvText], { type: "text/plain;charset=utf-8" });
-        const fileUrl = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-
-        link.href = fileUrl;
-        link.download = "cv-sihad.txt";
-        link.click();
-
-        URL.revokeObjectURL(fileUrl);
-        showToast("CV berhasil diunduh.");
+        try {
+            const response = await fetch("assets/cv-sihad.pdf");
+            if (!response.ok) throw new Error("PDF belum tersedia");
+            const pdfBlob = await response.blob();
+            downloadBlob(pdfBlob, "CV_Sihad.pdf");
+            showToast("CV PDF berhasil diunduh.");
+        } catch (error) {
+            downloadBlob(new Blob([cvText], { type: "text/plain;charset=utf-8" }), "cv-sihad.txt");
+            showToast("CV PDF belum diunggah — unduh versi teks dulu ya.");
+        }
     });
 
     copyPortfolioLinkButton?.addEventListener("click", async () => {
@@ -706,6 +717,12 @@ function openCert(src, title, organizer, year, verify, filename) {
 // Expose for inline onclick handlers in certificates.html
 window.openCertFromElement = openCertFromElement;
 
+    const CONTACT_CONFIG = {
+        accessKey: "",
+        ownerEmail: "amsihad0@gmail.com",
+        endpoint: "https://api.web3forms.com/submit"
+    };
+
     contactForm?.addEventListener("submit", event => {
         event.preventDefault();
 
@@ -730,26 +747,86 @@ window.openCertFromElement = openCertFromElement;
         const msg = messageInput?.value.trim() || "";
         const defaultText = submitButton?.textContent || "Kirim Pesan";
 
+        const resetForm = () => {
+            contactForm.reset();
+            formFields.forEach(field => field.classList.remove("is-invalid"));
+            updateMessageCounter();
+            if (submitButton) {
+                submitButton.textContent = defaultText;
+                submitButton.classList.remove("is-submitting");
+            }
+        };
+
+        const fallbackMailto = () => {
+            const subject = encodeURIComponent(`Pesan Portfolio: ${topic}`);
+            const body = encodeURIComponent(`Nama: ${userName}\nEmail: ${email}\nTopik: ${topic}\nCatatan: ${notes}\n\nPesan:\n${msg}`);
+            window.location.href = `mailto:${CONTACT_CONFIG.ownerEmail}?subject=${subject}&body=${body}`;
+            showToast("Membuka aplikasi email kamu dengan pesan terisi.");
+        };
+
         if (submitButton) {
             submitButton.textContent = "Mengirim...";
             submitButton.classList.add("is-submitting");
         }
 
-        const subject = encodeURIComponent(`Pesan Portfolio: ${topic}`);
-        const body = encodeURIComponent(`Nama: ${userName}\nEmail: ${email}\nTopik: ${topic}\nCatatan: ${notes}\n\nPesan:\n${msg}`);
+        if (!CONTACT_CONFIG.accessKey) {
+            fallbackMailto();
+            showToast("Form belum terhubung ke layanan email — masukkan access key Web3Forms di script.js biar terkirim langsung.");
+            resetForm();
+            return;
+        }
 
-        window.setTimeout(() => {
-            window.location.href = `mailto:amsihad0@gmail.com?subject=${subject}&body=${body}`;
-            showToast(`Pesan dari ${userName} telah diteruskan ke email.`);
-            contactForm.reset();
-            formFields.forEach(field => field.classList.remove("is-invalid"));
-            updateMessageCounter();
+        fetch(CONTACT_CONFIG.endpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify({
+                access_key: CONTACT_CONFIG.accessKey,
+                subject: `Pesan Portfolio: ${topic}`,
+                from_name: "Portofolio Shihad",
+                name: userName,
+                email: email,
+                topic: topic,
+                notes: notes,
+                message: msg
+            })
+        })
+            .then(response => response.json().then(data => ({ ok: response.ok, data })))
+            .then(({ ok, data }) => {
+                if (!ok || !data.success) throw new Error("Kirim gagal");
+                showToast(`Terima kasih ${userName}, pesanmu sudah terkirim ke email Shihad.`);
+                resetForm();
+            })
+            .catch(() => {
+                fallbackMailto();
+                resetForm();
+            });
+    });
 
-            if (submitButton) {
-                submitButton.textContent = defaultText;
-                submitButton.classList.remove("is-submitting");
-            }
-        }, 800);
+    /* ---------- Lightbox screenshot proyek + guard link demo placeholder ---------- */
+    const projectModalEl = document.getElementById("projectModal");
+    const projectModal = projectModalEl ? bootstrap.Modal.getOrCreateInstance(projectModalEl) : null;
+
+    document.querySelectorAll(".project-shot").forEach(img => {
+        img.classList.add("project-shot-clickable");
+
+        img.addEventListener("click", () => {
+            const modalImage = document.getElementById("projectModalImage");
+            const modalTitle = document.getElementById("projectModalTitle");
+            if (!projectModal || !modalImage) return;
+            modalImage.src = img.getAttribute("src");
+            if (modalTitle) modalTitle.textContent = (img.alt || "").replace("Screenshot proyek ", "");
+            projectModal.show();
+        });
+    });
+
+    document.querySelectorAll('#projectGrid a[href^="https://ganti-"]').forEach(anchor => {
+        anchor.addEventListener("click", event => {
+            event.preventDefault();
+            showToast("Link demo belum dipasang — ganti href tombol ini di index.html (cari 'ganti-dengan-link-demo').");
+        });
     });
 
     /* ============================================================

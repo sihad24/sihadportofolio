@@ -1,0 +1,55 @@
+CV SIHAD
+Frontend Developer & IoT Enthusiast
+============================================================
+
+RINGKASAN
+Frontend developer dengan fokus pada pembangunan antarmuka web yang
+responsif, terstruktur, dan mudah digunakan. Terampil menggunakan
+HTML5, CSS3, dan JavaScript, serta framework Bootstrap dan Tailwind
+untuk menghadirkan tampilan modern. Terbiasa menerjemahkan kebutuhan
+pengguna menjadi tampilan digital yang fungsional dan siap tayang.
+
+KONTAK
+- Email    : amsihad0@gmail.com
+- WhatsApp : +62 831 3020 0846
+- LinkedIn : linkedin.com/in/sihad
+- GitHub   : github.com/sihad24
+- Lokasi   : Indonesia
+
+KEAHLIAN
+- HTML5
+- CSS3
+- JavaScript
+- Bootstrap 5
+- Tailwind CSS
+
+ALAT KERJA
+- Git
+- GitHub
+- Vercel
+
+PENGALAMAN PROYEK
+1) Website Portofolio Pribadi (2026)
+   HTML5, CSS3, JavaScript, Bootstrap
+   Merancang dan membangun website portofolio pribadi dengan
+   tampilan modern, efek 3D interaktif, serta konten yang tersusun
+   rapi.
+
+2) Dashboard Informasi (2025)
+   Bootstrap, Grid Layout, JavaScript
+   Membangun antarmuka dashboard dengan struktur data yang jelas dan
+   tata letak yang nyaman dibaca untuk informasi yang padat.
+
+3) Landing Page Promosi (2025)
+   Tailwind, CSS Custom, Responsive Design
+   Membuat halaman promosi dengan fokus pada pesan utama dan alur
+   visual yang mendukung konversi pengunjung.
+
+SERTIFIKASI & PELATIHAN
+- The Bits and Bytes of Computer Networking - Google via Coursera, 2026
+- Foundations of Project Management - Google via Coursera, 2026
+- Webinar: Cloud Native Infrastructure with Docker, Kubernetes & GitOps - SUHU, Yogyakarta, 2026
+- Sertifikat Kompetensi Keahlian - CV. Wahana Prima, 2023
+
+Karya dan referensi sumber: github.com/sihad24
+Versi PDF: assets/cv-sihad.pdf

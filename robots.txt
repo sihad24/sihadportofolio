@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /tools/
+Disallow: /aktifasi-generator.html
+
+# GANTI catatan ini sebelum publish:
+# - domain sitemap: hapus baris ini & perbarui <loc> di sitemap.xml setelah deploy
+# - aktifasi-generator.html sengaja dicegat dari mesin pencari (khusus pemilik)

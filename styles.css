@@ -2368,3 +2368,9 @@ body.cert-locked .modern-gallery {
     border-radius: 8px;
     margin-right: 0.75rem;
 }
+
+/* Lightbox screenshot proyek */
+
+.project-shot-clickable {
+    cursor: zoom-in;
+}

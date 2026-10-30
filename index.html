@@ -272,10 +272,10 @@
                                         <p class="text-white-50 mt-2 mb-0">Jurusan TBSM (Teknik Bisnis Sepeda Motor). Menyelesaikan SMK pada 2023.</p>
                                     </div>
                                     <div class="highlight-item deck-item">
-                                        <span>UNI</span>
-                                        <h3>Universitas Kebangsaan Republik Indonesia <small class="text-white-50">2023–sekarang</small></h3>
-                                        <p>Sarjana Teknik Informatika — Jl. Pelajar Pejuang 45 No.8, Lengkong, Bandung, Jawa Barat 40263</p>
-                                        <p class="text-white-50 mt-2 mb-0">Sedang menempuh studi S1 (Teknik Informatika), fokus pada frontend dan IoT.</p>
+                                        <span>UNIV</span>
+                                        <h3>Universitas Kebangsaan Republik Indonesia <small class="text-white-50">2023–2027</small></h3>
+                                        <p>Jl. Pelajar Pejuang 45 No.8, Lengkong, Bandung, Jawa Barat 40263</p>
+                                        <p class="text-white-50 mt-2 mb-0">studi S1 (Teknik Informatika), menyelesaikan pada 2027.</p>
                                     </div>
                                 </div>
                             </div>
@@ -289,7 +289,7 @@
             <div class="container">
                 <div class="section-heading text-center mx-auto reveal">
                     <p class="section-kicker">Ringkasan Profesional</p>
-                    <h2 class="section-title">Saya membangun kemampuan di dua arah utama: frontend yang rapi dan teknologi yang bisa terhubung secara nyata.</h2>
+                    <h2 class="section-title">Saya membangun kemampuan di dua arah utama: frontend dan teknologi yang bisa terhubung secara nyata.</h2>
                     <p class="section-copy mx-auto">
                         Saya fokus pada pengembangan antarmuka pengguna yang responsif, navigasi yang jelas, serta ide-ide digital yang dapat diterapkan dalam proyek nyata.
                     </p>
@@ -818,7 +818,7 @@
                             <div class="form-card-head">
                                 <p class="card-kicker mb-2">Kirim Pesan</p>
                                 <h3 class="h3 text-white font-display mb-2">Tulis pesan singkat</h3>
-                                <p class="text-white-50 mb-0">Pesan Anda akan dibuka di aplikasi email Anda.</p>
+                                <p class="text-white-50 mb-0">Pesan Anda terkirim langsung ke email saya.</p>
                             </div>
                             <form id="contactForm" class="row g-3 mt-1" novalidate>
                                 <div class="col-md-6">
@@ -857,7 +857,7 @@
                                 </div>
                                 <div class="col-12 d-flex flex-wrap gap-3 align-items-center">
                                     <button id="submitButton" class="btn btn-brand btn-lg rounded-pill px-4" type="submit">Kirim Pesan</button>
-                                    <span class="text-white-50 small">Ini akan membuka aplikasi email Anda dengan pesan terisi.</span>
+                                    <span class="text-white-50 small">Pesan masuk ke email saya, biasanya dibalas dalam 1-2 hari kerja.</span>
                                 </div>
                             </form>
                         </div>
@@ -877,11 +877,24 @@
             </div>
         </div>
         <div class="container pb-4 d-flex justify-content-center gap-4">
-            <a href="https://github.com/sihad123" target="_blank" rel="noopener noreferrer" class="footer-link fs-4" aria-label="GitHub"><i class="bi bi-github"></i></a>
+            <a href="https://github.com/sihad24" target="_blank" rel="noopener noreferrer" class="footer-link fs-4" aria-label="GitHub"><i class="bi bi-github"></i></a>
             <a href="https://linkedin.com/in/sihad" target="_blank" rel="noopener noreferrer" class="footer-link fs-4" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
             <a href="mailto:amsihad0@gmail.com" class="footer-link fs-4" aria-label="Email"><i class="bi bi-envelope"></i></a>
         </div>
     </footer>
+
+    <!-- Modal: lightbox screenshot proyek -->
+    <div class="modal fade" id="projectModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content bg-transparent border-0">
+                <div class="modal-body position-relative">
+                    <button type="button" class="btn-close btn-close-white position-absolute end-3 top-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <img id="projectModalImage" src="#" alt="Screenshot proyek" class="img-fluid cert-modal-image rounded shadow-lg bg-dark p-2">
+                    <h5 id="projectModalTitle" class="text-center text-white mb-0 mt-3"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <button id="sceneToggle" class="scene-toggle" type="button" aria-pressed="true" title="Nyalakan/matikan efek 3D">
         <i class="bi bi-boxes"></i>
