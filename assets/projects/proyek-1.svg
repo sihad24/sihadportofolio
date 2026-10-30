@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Placeholder screenshot proyek">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1e33"/>
+      <stop offset="1" stop-color="#07111f"/>
+    </linearGradient>
+    <linearGradient id="ac1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff8a3d"/>
+      <stop offset="1" stop-color="#ffac62"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg1)"/>
+  <rect width="800" height="44" fill="#040b15"/>
+  <circle cx="26" cy="22" r="6" fill="#ff5f57"/>
+  <circle cx="46" cy="22" r="6" fill="#febc2e"/>
+  <circle cx="66" cy="22" r="6" fill="#28c840"/>
+  <rect x="220" y="10" width="360" height="24" rx="12" fill="rgba(255,255,255,0.08)"/>
+  <rect x="40" y="110" width="300" height="16" rx="8" fill="url(#ac1)"/>
+  <rect x="40" y="146" width="420" height="26" rx="10" fill="rgba(255,255,255,0.85)"/>
+  <rect x="40" y="190" width="360" height="12" rx="6" fill="rgba(255,255,255,0.28)"/>
+  <rect x="40" y="214" width="320" height="12" rx="6" fill="rgba(255,255,255,0.18)"/>
+  <rect x="40" y="262" width="130" height="40" rx="20" fill="url(#ac1)"/>
+  <rect x="190" y="262" width="110" height="40" rx="20" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+  <rect x="520" y="100" width="240" height="320" rx="14" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
+  <rect x="540" y="124" width="200" height="12" rx="6" fill="rgba(255,255,255,0.3)"/>
+  <rect x="540" y="150" width="160" height="12" rx="6" fill="rgba(255,255,255,0.18)"/>
+  <rect x="540" y="190" width="200" height="90" rx="10" fill="rgba(255,138,61,0.18)"/>
+  <rect x="540" y="296" width="200" height="8" rx="4" fill="rgba(255,255,255,0.2)"/>
+  <rect x="540" y="316" width="150" height="8" rx="4" fill="rgba(255,255,255,0.14)"/>
+  <rect x="540" y="336" width="180" height="8" rx="4" fill="rgba(255,255,255,0.14)"/>
+  <text x="400" y="480" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="rgba(255,255,255,0.45)">Placeholder — ganti dengan screenshot asli proyek</text>
+</svg>

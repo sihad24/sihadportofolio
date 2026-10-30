@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Placeholder screenshot proyek">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0c273f"/>
+      <stop offset="1" stop-color="#07111f"/>
+    </linearGradient>
+    <linearGradient id="ac2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9ad8c8"/>
+      <stop offset="1" stop-color="#8caee5"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg2)"/>
+  <rect width="800" height="44" fill="#040b15"/>
+  <circle cx="26" cy="22" r="6" fill="#ff5f57"/>
+  <circle cx="46" cy="22" r="6" fill="#febc2e"/>
+  <circle cx="66" cy="22" r="6" fill="#28c840"/>
+  <rect x="220" y="10" width="360" height="24" rx="12" fill="rgba(255,255,255,0.08)"/>
+  <rect x="40" y="40" width="84" height="500" fill="rgba(4,11,21,0.55)"/>
+  <rect x="60" y="100" width="44" height="10" rx="5" fill="rgba(255,255,255,0.25)"/>
+  <rect x="60" y="140" width="44" height="10" rx="5" fill="rgba(154,216,200,0.6)"/>
+  <rect x="60" y="180" width="44" height="10" rx="5" fill="rgba(255,255,255,0.25)"/>
+  <rect x="160" y="90" width="180" height="110" rx="12" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
+  <rect x="180" y="116" width="70" height="10" rx="5" fill="rgba(255,255,255,0.3)"/>
+  <rect x="180" y="142" width="120" height="20" rx="8" fill="url(#ac2)"/>
+  <rect x="360" y="90" width="180" height="110" rx="12" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
+  <rect x="380" y="116" width="70" height="10" rx="5" fill="rgba(255,255,255,0.3)"/>
+  <rect x="380" y="142" width="120" height="20" rx="8" fill="#ff8a3d"/>
+  <rect x="560" y="90" width="180" height="110" rx="12" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
+  <rect x="580" y="116" width="70" height="10" rx="5" fill="rgba(255,255,255,0.3)"/>
+  <rect x="580" y="142" width="120" height="20" rx="8" fill="#8caee5"/>
+  <rect x="160" y="230" width="580" height="200" rx="12" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
+  <polyline points="190,390 290,340 390,360 490,290 590,310 690,260" fill="none" stroke="url(#ac2)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="450" y="470" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="rgba(255,255,255,0.45)">Placeholder — ganti dengan screenshot asli proyek</text>
+</svg>

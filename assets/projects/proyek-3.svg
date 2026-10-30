@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Placeholder screenshot proyek">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#231738"/>
+      <stop offset="1" stop-color="#0a1128"/>
+    </linearGradient>
+    <linearGradient id="ac3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff8a3d"/>
+      <stop offset="1" stop-color="#9ad8c8"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg3)"/>
+  <rect width="800" height="44" fill="#040b15"/>
+  <circle cx="26" cy="22" r="6" fill="#ff5f57"/>
+  <circle cx="46" cy="22" r="6" fill="#febc2e"/>
+  <circle cx="66" cy="22" r="6" fill="#28c840"/>
+  <rect x="220" y="10" width="360" height="24" rx="12" fill="rgba(255,255,255,0.08)"/>
+  <circle cx="400" cy="180" r="56" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+  <circle cx="400" cy="180" r="34" fill="rgba(255,138,61,0.25)"/>
+  <rect x="250" y="266" width="300" height="24" rx="12" fill="rgba(255,255,255,0.9)"/>
+  <rect x="290" y="306" width="220" height="12" rx="6" fill="rgba(255,255,255,0.35)"/>
+  <rect x="320" y="334" width="160" height="12" rx="6" fill="rgba(255,255,255,0.2)"/>
+  <rect x="330" y="372" width="140" height="42" rx="21" fill="url(#ac3)"/>
+  <rect x="70" y="100" width="90" height="90" rx="12" fill="rgba(154,216,200,0.1)" stroke="rgba(154,216,200,0.3)"/>
+  <rect x="90" y="125" width="50" height="10" rx="5" fill="rgba(154,216,200,0.7)"/>
+  <rect x="640" y="290" width="90" height="90" rx="12" fill="rgba(255,138,61,0.1)" stroke="rgba(255,138,61,0.35)"/>
+  <rect x="660" y="315" width="50" height="10" rx="5" fill="rgba(255,138,61,0.8)"/>
+  <text x="400" y="475" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="rgba(255,255,255,0.45)">Placeholder — ganti dengan screenshot asli proyek</text>
+</svg>

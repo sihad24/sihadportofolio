@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portofolio Shihad yang menampilkan frontend, minat IoT, pendidikan, keterampilan, dan proyek.">
+    <title>Shihad | Portofolio Frontend & IoT</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="canonical" href="https://domain-kamu.vercel.app/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://domain-kamu.vercel.app/">
+    <meta property="og:title" content="Shihad | Portofolio Frontend & IoT">
+    <meta property="og:description" content="Portofolio Shihad yang menampilkan frontend, minat IoT, pendidikan, keterampilan, dan proyek.">
+    <meta property="og:image" content="https://domain-kamu.vercel.app/assets/og-banner.jpg">
+    <meta property="og:image:secure_url" content="https://domain-kamu.vercel.app/assets/og-banner.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Foto Shihad, Frontend & IoT Enthusiast">
+    <meta property="og:site_name" content="Portofolio Shihad">
+    <meta property="og:locale" content="id_ID">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://domain-kamu.vercel.app/">
+    <meta name="twitter:title" content="Shihad | Portofolio Frontend & IoT">
+    <meta name="twitter:description" content="Portofolio Shihad yang menampilkan frontend, minat IoT, pendidikan, keterampilan, dan proyek.">
+    <meta name="twitter:image" content="https://domain-kamu.vercel.app/assets/og-banner.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile.css">
+</head>
+
+<body class="font-body">
+    <div id="preloader" class="preloader" aria-hidden="true">
+        <div class="pre-stage">
+            <div class="pre-cube">
+                <span class="pre-face"></span>
+                <span class="pre-face"></span>
+                <span class="pre-face"></span>
+                <span class="pre-face"></span>
+                <span class="pre-face"></span>
+                <span class="pre-face"></span>
+                <span class="pre-glow"></span>
+            </div>
+            <p class="pre-text">Memuat Portofolio<span class="pre-dots"><i>.</i><i>.</i><i>.</i></span></p>
+        </div>
+    </div>
+
+    <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+    <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+    <canvas id="heroCanvas" aria-hidden="true"></canvas>
+
+    <div class="scroll-progress" aria-hidden="true">
+        <span id="scrollProgressBar"></span>
+    </div>
+
+    <nav id="mainNav" class="navbar navbar-expand-lg fixed-top portfolio-nav">
+        <div class="container py-3">
+            <a class="navbar-brand text-white fw-bold" href="#home">SHIHAD</a>
+            <button class="navbar-toggler border-0 shadow-none text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPortfolio" aria-controls="navbarPortfolio" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list fs-2"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarPortfolio">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-4">
+                    <li class="nav-item"><a class="nav-link portfolio-link active" href="#home">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link portfolio-link" href="#about">Tentang</a></li>
+                    <li class="nav-item"><a class="nav-link portfolio-link" href="#summary">Ringkasan</a></li>
+                    <li class="nav-item"><a class="nav-link portfolio-link" href="#skills">Keahlian</a></li>
+                    <li class="nav-item"><a class="nav-link portfolio-link" href="#projects">Proyek</a></li>
+                    <li class="nav-item"><a class="nav-link portfolio-link" href="#experience">Perjalanan</a></li>
+                    <li class="nav-item"><a class="nav-link portfolio-link" href="certificates.html">Sertifikat</a></li>
+                    <li class="nav-item"><a class="nav-link portfolio-link" href="#contact">Kontak</a></li>
+                    <li class="nav-item mt-3 mt-lg-0">
+                        <a class="btn btn-sm btn-brand rounded-pill px-4" href="#contact">Hubungi</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="hero-section overflow-hidden">
+            <span class="hero-orb orb-one" aria-hidden="true"></span>
+            <span class="hero-orb orb-two" aria-hidden="true"></span>
+            <div class="container position-relative">
+                <div class="row align-items-center min-vh-100 g-5 py-5">
+                    <div class="col-lg-7">
+                        <span class="badge rounded-pill hero-badge px-4 py-2 mb-4">Shihad — Frontend & IoT Enthusiast</span>
+                        <p class="hero-kicker mb-3">HTML / CSS / JavaScript / Bootstrap / Tailwind</p>
+
+                        <div class="hero-rotator mb-3">
+                            <span class="hero-rotator-label">Sedang fokus pada</span>
+                            <span id="typedRole" class="typed-role" data-words='["antarmuka bersih", "situs responsif", "ide IoT", "pengalaman pengguna yang lebih baik"]'></span>
+                            <span class="typed-cursor" aria-hidden="true"></span>
+                        </div>
+
+                        <h1 class="font-display fw-bold display-3 mb-4 text-white reveal">
+                            Saya Shihad, <span class="title-accent">Frontend Developer</span> yang fokus pada antarmuka modern, responsif, dan pengalaman pengguna yang jelas.
+                        </h1>
+                        <p class="hero-copy fs-5 mb-4 reveal">
+                            Saya membangun kemampuan di bidang pengembangan web dan IoT, dengan minat utama pada desain yang bersih, struktur yang rapi, dan solusi digital yang bisa langsung dipakai.
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-3 mb-4 reveal">
+                            <a href="#projects" class="btn btn-brand btn-lg rounded-pill px-4">Lihat Karyaku</a>
+                            <a href="#contact" class="btn btn-outline-light btn-lg rounded-pill px-4">Hubungi Saya</a>
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-3 mb-4 reveal">
+                            <button id="downloadCv" type="button" class="btn btn-outline-light rounded-pill px-4">
+                                <i class="bi bi-download me-2"></i>Unduh CV
+                            </button>
+                            <button id="copyPortfolioLink" type="button" class="btn btn-outline-light rounded-pill px-4">
+                                <i class="bi bi-link-45deg me-2"></i>Salin Link Portofolio
+                            </button>
+                        </div>
+
+                        <div class="hero-stats reveal">
+                            <div class="stat-item">
+                                <strong data-count="3" data-suffix="+">0</strong>
+                                <span>Tahun belajar</span>
+                            </div>
+                            <div class="stat-item">
+                                <strong data-count="8" data-suffix="+">0</strong>
+                                <span>Tools & Stack</span>
+                            </div>
+                            <div class="stat-item">
+                                <strong data-count="100" data-suffix="%">0</strong>
+                                <span>Semangat belajar</span>
+                            </div>
+                        </div>
+
+                        <div class="hero-badges reveal">
+                            <span>Responsive UI</span>
+                            <span>Landing Page</span>
+                            <span>HTML/CSS/JS</span>
+                            <span>IoT Enthusiast</span>
+                        </div>
+
+                        <div class="hero-socials reveal">
+                            <a class="hero-social-pill" href="mailto:amsihad0@gmail.com">
+                                <i class="bi bi-envelope"></i>
+                                <span>amsihad0@gmail.com</span>
+                            </a>
+                            <a class="hero-social-pill" href="https://wa.me/6283130200846" target="_blank" rel="noopener noreferrer">
+                                <i class="bi bi-whatsapp"></i>
+                                <span>WhatsApp</span>
+                            </a>
+                            <span class="hero-social-pill is-static">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>Indonesia</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="hero-card glass-card p-4 p-lg-5 shadow-halo reveal">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <p class="card-kicker mb-1">Identitas</p>
+                                    <h2 class="h4 text-white mb-0 font-display">Ringkasan Profil</h2>
+                                </div>
+                                <span class="mini-pill">Siap Berkembang</span>
+                            </div>
+
+                            <div class="profile-photo-panel mb-4">
+                                <img id="profilePhoto" class="has-photo" src="assets/sihad.jpeg" data-fallback-photo="assets/profile-placeholder.svg" alt="Foto profil Shihad" width="1086" height="1448">
+                                <span class="float-chip fc-1" aria-hidden="true"><i class="bi bi-filetype-html"></i></span>
+                                <span class="float-chip fc-2" aria-hidden="true"><i class="bi bi-filetype-css"></i></span>
+                                <span class="float-chip fc-3" aria-hidden="true"><i class="bi bi-braces"></i></span>
+                                <div class="profile-photo-overlay">
+                                    <div>
+                                        <span>Foto Profil</span>
+                                        <strong>Shihad</strong>
+                                    </div>
+                                    <small>Frontend & IoT</small>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center gap-3 mb-4">
+                                <div class="avatar-ring">S</div>
+                                <div>
+                                    <h3 class="h5 text-white mb-1">Shihad</h3>
+                                    <p class="text-white-50 mb-0">Teknik Informatika</p>
+                                </div>
+                            </div>
+
+                            <div class="identity-strip mb-4">
+                                <div>
+                                    <span>Nama</span>
+                                    <strong>Shihad</strong>
+                                </div>
+                                <div>
+                                    <span>Fokus</span>
+                                    <strong>Frontend & IoT</strong>
+                                </div>
+                                <div>
+                                    <span>Peran</span>
+                                    <strong>Mahasiswa</strong>
+                                </div>
+                            </div>
+
+                            <div class="quick-facts">
+                                <div class="quick-fact">
+                                    <span>Fokus Utama</span>
+                                    <strong>Frontend & IoT</strong>
+                                </div>
+                                <div class="quick-fact">
+                                    <span>Arah Pertumbuhan</span>
+                                    <strong>Antarmuka web dan sistem terhubung</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section-space">
+            <div class="container">
+                <div class="row align-items-start g-4 g-lg-5">
+                    <div class="col-lg-5">
+                        <div class="section-heading reveal">
+                                    <p class="section-kicker">Tentang Saya</p>
+                                    <h2 class="section-title">Mahasiswa Teknik Informatika yang terus membangun kemampuan di dunia frontend dan teknologi terhubung.</h2>
+                                    <p class="section-copy">
+                                        Saya adalah individu yang tertarik pada desain antarmuka, struktur halaman yang rapi, dan ide-ide yang dapat diubah menjadi produk digital yang berguna.
+                                    </p>
+                        </div>
+
+                        <div class="glass-card p-4 p-xl-5 mt-4 reveal">
+                            <p class="card-kicker mb-2">Studi Saat Ini</p>
+                            <h3 class="h3 text-white font-display mb-3">Universitas Kebangsaan Republik Indonesia</h3>
+                            <p class="text-white-50 mb-3">
+                                Program Studi Teknik Informatika
+                            </p>
+                            <p class="text-white-50 mb-0">
+                                Bandung, Jawa Barat
+                            </p>
+                            <p class="text-white-50 mt-3 mb-0">
+                                Saya fokus pada pengembangan web, desain antarmuka, dan eksplorasi teknologi IoT yang aplikatif.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="stack-panel reveal">
+                            <div class="stack-card stack-card-main about-note">
+                                <p class="stack-label">Garis Waktu Pendidikan</p>
+                                <div class="d-grid gap-3 mt-4">
+                                    <div class="highlight-item deck-item">
+                                        <span>SD</span>
+                                        <h3>SDN Sindangsari 1 <small class="text-white-50">2011–2017</small></h3>
+                                        <p>Kp. Sindangsari, Desa Ciluluk, Cikancung, Bandung, West Java 40396</p>
+                                        <p class="text-white-50 mt-2 mb-0">Lulus SD pada tahun 2017.</p>
+                                    </div>
+                                    <div class="highlight-item deck-item">
+                                        <span>MTs</span>
+                                        <h3>MTs Ar-Rohman <small class="text-white-50">2017–2020</small></h3>
+                                        <p>Kp. Dukuh Ibun Terusan, Mekarwangi, Ibun, Bandung Regency, West Java 40384</p>
+                                        <p class="text-white-50 mt-2 mb-0">Pendidikan menengah pertama, menyelesaikan MTs pada 2020.</p>
+                                    </div>
+                                    <div class="highlight-item deck-item">
+                                        <span>SMK</span>
+                                        <h3>SMK Al-Bantari <small class="text-white-50">2020–2023</small></h3>
+                                        <p>Cihea, Haurwangi, Cianjur Regency, West Java 43283</p>
+                                        <p class="text-white-50 mt-2 mb-0">Jurusan TBSM (Teknik Bisnis Sepeda Motor). Menyelesaikan SMK pada 2023.</p>
+                                    </div>
+                                    <div class="highlight-item deck-item">
+                                        <span>UNI</span>
+                                        <h3>Universitas Kebangsaan Republik Indonesia <small class="text-white-50">2023–sekarang</small></h3>
+                                        <p>Sarjana Teknik Informatika — Jl. Pelajar Pejuang 45 No.8, Lengkong, Bandung, Jawa Barat 40263</p>
+                                        <p class="text-white-50 mt-2 mb-0">Sedang menempuh studi S1 (Teknik Informatika), fokus pada frontend dan IoT.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="summary" class="section-space section-alt">
+            <div class="container">
+                <div class="section-heading text-center mx-auto reveal">
+                    <p class="section-kicker">Ringkasan Profesional</p>
+                    <h2 class="section-title">Saya membangun kemampuan di dua arah utama: frontend yang rapi dan teknologi yang bisa terhubung secara nyata.</h2>
+                    <p class="section-copy mx-auto">
+                        Saya fokus pada pengembangan antarmuka pengguna yang responsif, navigasi yang jelas, serta ide-ide digital yang dapat diterapkan dalam proyek nyata.
+                    </p>
+                </div>
+
+                <div class="row g-4 mt-2">
+                    <div class="col-lg-4">
+                        <article class="service-card h-100 reveal">
+                            <span class="service-index">01</span>
+                            <h3>Frontend</h3>
+                            <p>Menggunakan HTML, CSS, dan JavaScript untuk membangun halaman yang bersih, modern, dan mudah dipahami.</p>
+                            <ul class="service-list">
+                                <li>Layout responsif</li>
+                                <li>Desain antarmuka</li>
+                                <li>Interaksi sederhana</li>
+                            </ul>
+                        </article>
+                    </div>
+                    <div class="col-lg-4">
+                        <article class="service-card h-100 reveal">
+                            <span class="service-index">02</span>
+                            <h3>IoT</h3>
+                            <p>Memahami dasar perangkat terhubung dan cara mengintegrasikannya ke dalam sistem yang lebih luas.</p>
+                            <ul class="service-list">
+                                <li>Sensor & perangkat</li>
+                                <li>Konsep sistem terhubung</li>
+                                <li>Integrasi perangkat</li>
+                            </ul>
+                        </article>
+                    </div>
+                    <div class="col-lg-4">
+                        <article class="service-card h-100 reveal">
+                            <span class="service-index">03</span>
+                            <h3>Growth</h3>
+                            <p>Saya terus belajar melalui proyek mandiri, eksperimen, dan pengembangan kemampuan yang relevan dengan kebutuhan zaman.</p>
+                            <ul class="service-list">
+                                <li>Belajar mandiri</li>
+                                <li>Eksperimen UI</li>
+                                <li>Proyek praktis</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section-space">
+            <div class="container">
+                <div class="section-heading text-center mx-auto reveal">
+                    <p class="section-kicker">Fokus Utama</p>
+                    <h2 class="section-title">Bagian yang saya bangun dan terus kembangkan dalam proses belajar.</h2>
+                    <p class="section-copy mx-auto">
+                        Saya berfokus pada interface yang bersih, struktur yang terorganisir, dan pengalaman pengguna yang jelas dalam setiap proyek.
+                    </p>
+                </div>
+
+                <div class="row g-4 mt-2">
+                    <div class="col-lg-4">
+                        <article class="service-card h-100 reveal">
+                            <span class="service-index">01</span>
+                            <h3>Branding Diri</h3>
+                            <p>Menampilkan identitas, nilai belajar, dan arah pengembangan saya secara lebih profesional.</p>
+                            <ul class="service-list">
+                                <li>Profil singkat</li>
+                                <li>Kontak yang jelas</li>
+                                <li>Fokus karier</li>
+                            </ul>
+                        </article>
+                    </div>
+                    <div class="col-lg-4">
+                        <article class="service-card h-100 reveal">
+                            <span class="service-index">02</span>
+                            <h3>Frontend Skill</h3>
+                            <p>Memahami teknik dasar pembuatan halaman responsif yang berbasis kebutuhan pengguna.</p>
+                            <ul class="service-list">
+                                <li>HTML & CSS</li>
+                                <li>JavaScript</li>
+                                <li>Bootstrap / Tailwind</li>
+                            </ul>
+                        </article>
+                    </div>
+                    <div class="col-lg-4">
+                        <article class="service-card h-100 reveal">
+                            <span class="service-index">03</span>
+                            <h3>Project Showcase</h3>
+                            <p>Menampilkan hasil belajar dan eksperimen saya dalam bentuk karya yang lebih rapi dan terarah.</p>
+                            <ul class="service-list">
+                                <li>Landing page</li>
+                                <li>Portfolio pribadi</li>
+                                <li>Antarmuka sederhana</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-space">
+            <div class="container">
+                <div class="row g-4 g-lg-5 align-items-start">
+                    <div class="col-lg-5">
+                        <div class="section-heading reveal">
+                            <p class="section-kicker">Proses Proyek</p>
+                            <h2 class="section-title">Alur kerja sederhana yang saya gunakan saat membangun proyek.</h2>
+                            <p class="section-copy mb-0">
+                                Bagian ini merangkum bagaimana saya mempelajari, membangun, dan menyempurnakan ide frontend dan IoT langkah demi langkah.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="process-grid reveal">
+                            <article class="process-card">
+                                <span class="process-step">Langkah 01</span>
+                                    <h3>Memahami tujuan</h3>
+                                <p>Tentukan tujuan halaman, konten yang dibutuhkan, dan arahan visual.</p>
+                            </article>
+                            <article class="process-card">
+                                <span class="process-step">Langkah 02</span>
+                                <h3>Menyusun tata letak</h3>
+                                <p>Menyusun bagian secara teratur sehingga halaman mudah dipindai.</p>
+                            </article>
+                            <article class="process-card">
+                                <span class="process-step">Langkah 03</span>
+                                <h3>Membangun dan menguji</h3>
+                                <p>Menulis HTML, CSS, dan JavaScript sambil memeriksa hasil di peramban.</p>
+                            </article>
+                            <article class="process-card">
+                                <span class="process-step">Langkah 04</span>
+                                <h3>Ulas dan poles</h3>
+                                <p>Menyempurnakan jarak, warna, tata letak mobile, dan bagian yang masih perlu diperbaiki.</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-space">
+            <div class="container">
+                <div class="section-heading text-center mx-auto reveal">
+                    <p class="section-kicker">Mengapa Saya?</p>
+                    <h2 class="section-title">Saya berusaha membangun produk digital yang terlihat rapi, mudah dipahami, dan berfungsi dengan baik.</h2>
+                    <p class="section-copy mx-auto">
+                        Saya tidak hanya fokus pada tampilan, tetapi juga pada struktur, kejelasan informasi, dan pengalaman pengguna yang nyaman di berbagai perangkat.
+                    </p>
+                </div>
+
+                <div class="row g-4 mt-2">
+                    <div class="col-lg-4">
+                        <article class="value-card h-100 reveal">
+                            <i class="bi bi-palette"></i>
+                            <h3>UI yang rapi</h3>
+                            <p>Memahami tata letak, hierarki visual, dan elemen yang membuat antarmuka terasa profesional.</p>
+                        </article>
+                    </div>
+                    <div class="col-lg-4">
+                        <article class="value-card h-100 reveal">
+                            <i class="bi bi-phone"></i>
+                            <h3>Responsif</h3>
+                            <p>Menyesuaikan tampilan agar nyaman di desktop, tablet, dan smartphone tanpa mengorbankan fungsi.</p>
+                        </article>
+                    </div>
+                    <div class="col-lg-4">
+                        <article class="value-card h-100 reveal">
+                            <i class="bi bi-lightning-charge"></i>
+                            <h3>Belajar cepat</h3>
+                            <p>Saya terbuka terhadap pembelajaran baru, cepat beradaptasi dengan teknologi, dan siap berkembang.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section-space">
+            <div class="container">
+                <div class="section-heading text-center mx-auto reveal">
+                    <p class="section-kicker">Keahlian</p>
+                    <h2 class="section-title">Keterampilan teknis yang saya gunakan dan kembangkan.</h2>
+                    <p class="section-copy mx-auto">
+                        Ini adalah alat inti yang menjadi andalan saya untuk belajar frontend dan eksplorasi IoT sederhana.
+                    </p>
+                </div>
+
+                <div class="row g-4 mt-2">
+                    <div class="col-lg-4">
+                        <div class="skill-card h-100 reveal">
+                            <div class="skill-card-head">
+                                <i class="bi bi-code-square"></i>
+                                <div>
+                                    <h3>Frontend</h3>
+                                    <p>Dasar yang sedang saya tingkatkan.</p>
+                                </div>
+                            </div>
+                            <div class="skill-meter-wrap">
+                                <div class="skill-meter-item">
+                                    <div class="d-flex justify-content-between"><span>HTML5</span><span>Baik</span></div>
+                                    <div class="skill-meter"><span class="skill-level-75"></span></div>
+                                </div>
+                                <div class="skill-meter-item">
+                                    <div class="d-flex justify-content-between"><span>CSS3</span><span>Baik</span></div>
+                                    <div class="skill-meter"><span class="skill-level-70"></span></div>
+                                </div>
+                                <div class="skill-meter-item">
+                                    <div class="d-flex justify-content-between"><span>JavaScript</span><span>Cukup</span></div>
+                                    <div class="skill-meter"><span class="skill-level-55"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="skill-card h-100 reveal">
+                            <div class="skill-card-head">
+                                <i class="bi bi-grid-1x2"></i>
+                                <div>
+                                    <h3>Alat</h3>
+                                    <p>Alat bantu yang saya gunakan untuk belajar dan membangun antarmuka.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="tech-chip">Bootstrap 5</span>
+                                <span class="tech-chip">Tailwind CSS</span>
+                                <span class="tech-chip">Bootstrap Icons</span>
+                                <span class="tech-chip">Responsive Layout</span>
+                                <span class="tech-chip">Utility Classes</span>
+                                <span class="tech-chip">Reusable Sections</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="skill-card h-100 reveal">
+                            <div class="skill-card-head">
+                                <i class="bi bi-rocket-takeoff"></i>
+                                <div>
+                                    <h3>Alur Kerja</h3>
+                                    <p>Cara saya mendekati pembelajaran dan menyelesaikan tugas.</p>
+                                </div>
+                            </div>
+                            <ul class="workflow-list mb-0">
+                                <li>Tentukan konten halaman sebelum mulai coding.</li>
+                                <li>Buat struktur HTML yang jelas.</li>
+                                <li>Tambahkan styling CSS dan dukungan framework.</li>
+                                <li>Periksa hasil di desktop dan seluler.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section-space section-alt">
+            <div class="container">
+                <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end gap-4 mb-4">
+                    <div class="section-heading reveal">
+                        <p class="section-kicker">Pekerjaan Pilihan</p>
+                        <h2 class="section-title">Karya yang saya tampilkan sebagai bukti proses belajar dan eksplorasi saya.</h2>
+                        <p class="section-copy mb-0">Beberapa hasil belajar frontend saya yang disusun dengan fokus pada tampilan, struktur, dan pengalaman pengguna.</p>
+                        <p id="projectCount" class="project-count mb-0">Menampilkan 3 karya utama</p>
+                    </div>
+                    <div class="project-filters d-flex flex-wrap gap-2 reveal">
+                        <button class="btn btn-filter active" type="button" data-filter="all">Semua</button>
+                        <button class="btn btn-filter" type="button" data-filter="website">Situs</button>
+                        <button class="btn btn-filter" type="button" data-filter="dashboard">Dasbor</button>
+                        <button class="btn btn-filter" type="button" data-filter="branding">UI</button>
+                    </div>
+                </div>
+
+                <div class="row g-4" id="projectGrid">
+                    <div class="col-lg-4 col-md-6 project-item reveal" data-category="website">
+                        <article class="project-card h-100">
+                            <div class="project-visual visual-a">
+                                <span class="project-tag project-tag-floating">Website</span>
+                                <img src="assets/projects/proyek-1.svg" alt="Screenshot proyek Portfolio Pribadi" class="project-shot" width="800" height="500" loading="lazy">
+                            </div>
+                            <div class="p-4">
+                                <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                                    <div>
+                                        <h3 class="h4 text-white font-display mb-1">Portfolio Pribadi</h3>
+                                        <p class="project-meta mb-0">Menyusun halaman profil yang menampilkan identitas, pendidikan, keahlian, dan saluran komunikasi secara rapi.</p>
+                                    </div>
+                                    <span class="project-year">2026</span>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <span class="tech-chip">HTML</span>
+                                    <span class="tech-chip">CSS</span>
+                                    <span class="tech-chip">JavaScript</span>
+                                    <span class="tech-chip">Bootstrap</span>
+                                </div>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <a href="https://github.com/sihad123" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-sm rounded-pill px-3"><i class="bi bi-github me-2"></i>GitHub</a>
+                                    <a href="https://ganti-dengan-link-demo-proyek-1.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-brand btn-sm rounded-pill px-3"><i class="bi bi-box-arrow-up-right me-2"></i>Live Demo</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 project-item reveal" data-category="dashboard">
+                        <article class="project-card h-100">
+                            <div class="project-visual visual-b">
+                                <span class="project-tag project-tag-floating">Dashboard</span>
+                                <img src="assets/projects/proyek-2.svg" alt="Screenshot proyek Dashboard Sederhana" class="project-shot" width="800" height="500" loading="lazy">
+                            </div>
+                            <div class="p-4">
+                                <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                                    <div>
+                                        <h3 class="h4 text-white font-display mb-1">Dashboard Sederhana</h3>
+                                        <p class="project-meta mb-0">Menerapkan struktur data yang jelas dan layout yang mudah dibaca untuk kebutuhan informasi yang padat.</p>
+                                    </div>
+                                    <span class="project-year">2025</span>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <span class="tech-chip">Bootstrap</span>
+                                    <span class="tech-chip">Grid Layout</span>
+                                    <span class="tech-chip">JavaScript</span>
+                                    <span class="tech-chip">UI Cards</span>
+                                </div>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <a href="https://github.com/sihad123" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-sm rounded-pill px-3"><i class="bi bi-github me-2"></i>GitHub</a>
+                                    <a href="https://ganti-dengan-link-demo-proyek-2.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-brand btn-sm rounded-pill px-3"><i class="bi bi-box-arrow-up-right me-2"></i>Live Demo</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 project-item reveal" data-category="branding">
+                        <article class="project-card h-100">
+                            <div class="project-visual visual-c">
+                                <span class="project-tag project-tag-floating">Landing Page</span>
+                                <img src="assets/projects/proyek-3.svg" alt="Screenshot proyek Landing Page Promosi" class="project-shot" width="800" height="500" loading="lazy">
+                            </div>
+                            <div class="p-4">
+                                <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                                    <div>
+                                        <h3 class="h4 text-white font-display mb-1">Landing Page Promosi</h3>
+                                        <p class="project-meta mb-0">Membuat halaman pendaratan dengan fokus pada pesan utama, alur visual, dan struktur konversi yang jelas.</p>
+                                    </div>
+                                    <span class="project-year">2025</span>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <span class="tech-chip">Tailwind</span>
+                                    <span class="tech-chip">CSS Custom</span>
+                                    <span class="tech-chip">Responsive</span>
+                                    <span class="tech-chip">UI Design</span>
+                                </div>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <a href="https://github.com/sihad123" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-sm rounded-pill px-3"><i class="bi bi-github me-2"></i>GitHub</a>
+                                    <a href="https://ganti-dengan-link-demo-proyek-3.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-brand btn-sm rounded-pill px-3"><i class="bi bi-box-arrow-up-right me-2"></i>Live Demo</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-space">
+            <div class="container">
+                <div class="row g-4 g-lg-5 align-items-start">
+                    <div class="col-lg-6">
+                        <div class="section-heading reveal">
+                            <p class="section-kicker">Alat</p>
+                            <h2 class="section-title">Alat yang paling sering saya gunakan.</h2>
+                            <p class="section-copy">
+                                Saya menggunakan alat dasar untuk mendukung pembelajaran frontend dan eksplorasi IoT sederhana.
+                            </p>
+                        </div>
+
+                        <div class="tool-panel reveal">
+                            <div class="tool-cloud">
+                                <span class="tool-badge">HTML5</span>
+                                <span class="tool-badge">CSS3</span>
+                                <span class="tool-badge">JavaScript</span>
+                                <span class="tool-badge">Bootstrap 5</span>
+                                <span class="tool-badge">Tailwind CSS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="cert-stack tool-summary reveal">
+                            <article class="cert-card deck-item">
+                                <div>
+                                    <h3>Tata Letak Responsif</h3>
+                                    <p>Dirancang agar nyaman pada layar desktop dan seluler.</p>
+                                </div>
+                            </article>
+                            <article class="cert-card deck-item">
+                                <div>
+                                    <h3>Komponen Sederhana</h3>
+                                    <p>Bagian, kartu, tombol, dan formulir disusun dengan jelas.</p>
+                                </div>
+                            </article>
+                            <article class="cert-card deck-item">
+                                <div>
+                                    <h3>Proyek Web</h3>
+                                    <p>Setiap proyek menjadi latihan untuk meningkatkan tata letak dan struktur.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section-space section-alt">
+            <div class="container">
+                <div class="row g-4 g-lg-5">
+                    <div class="col-lg-5">
+                        <div class="section-heading reveal">
+                            <p class="section-kicker">Perjalanan</p>
+                            <h2 class="section-title">Perjalanan pembelajaran saya sejauh ini.</h2>
+                            <p class="section-copy">
+                                Cerita singkat bagaimana pembelajaran frontend dan IoT membantu perkembangan saya.
+                            </p>
+                        </div>
+                        <div class="glass-card p-4 p-xl-5 mt-4 reveal">
+                            <p class="card-kicker mb-2">Sorotan</p>
+                            <h3 class="h3 text-white font-display mb-3">Fokus utama saya adalah frontend dan IoT.</h3>
+                            <p class="text-white-50 mb-4">
+                                Saya menampilkan identitas, pendidikan, dan arah yang sedang saya bangun saat ini.
+                            </p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="tech-chip">Frontend</span>
+                                <span class="tech-chip">Tata Letak UI</span>
+                                <span class="tech-chip">Responsif</span>
+                                <span class="tech-chip">Proyek Mandiri</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="timeline reveal">
+                            <article class="timeline-item">
+                                <span class="timeline-dot"></span>
+                                <div class="timeline-content">
+                                    <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mb-2">
+                                        <h3 class="h5 text-white mb-0">Fokus Frontend & IoT</h3>
+                                        <span class="timeline-period">2026</span>
+                                    </div>
+                                    <p>Saya memperdalam keterampilan frontend dan IoT sebagai fokus pembelajaran utama saya.</p>
+                                </div>
+                            </article>
+                            <article class="timeline-item">
+                                <span class="timeline-dot"></span>
+                                <div class="timeline-content">
+                                    <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mb-2">
+                                        <h3 class="h5 text-white mb-0">Dasar Web</h3>
+                                        <span class="timeline-period">2025</span>
+                                    </div>
+                                    <p>Mempelajari dasar web untuk mendukung pertumbuhan frontend dan pekerjaan IoT di masa depan.</p>
+                                </div>
+                            </article>
+                            <article class="timeline-item">
+                                <span class="timeline-dot"></span>
+                                <div class="timeline-content">
+                                    <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mb-2">
+                                        <h3 class="h5 text-white mb-0">Praktik Mandiri</h3>
+                                        <span class="timeline-period">2024 - sekarang</span>
+                                    </div>
+                                    <p>Membangun keterampilan frontend dan IoT melalui praktik dan proyek mandiri.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-space cta-section">
+            <div class="container">
+                <div class="cta-band reveal">
+                    <div class="cta-copy">
+                        <p class="section-kicker">Siap Berkolaborasi</p>
+                        <h2 class="section-title mb-3">Saya terbuka untuk proyek frontend, landing page, atau ide produk digital yang perlu dibangun dengan tampilan yang rapi.</h2>
+                    </div>
+                    <div class="cta-actions">
+                        <a href="#contact" class="btn btn-brand btn-lg rounded-pill px-4">Mulai Diskusi</a>
+                        <a href="mailto:amsihad0@gmail.com" class="btn btn-outline-light btn-lg rounded-pill px-4">Email Saya</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section-space contact-section">
+            <div class="container">
+                <div class="row g-4 g-lg-5 align-items-stretch">
+                    <div class="col-lg-5">
+                        <div class="glass-card contact-card h-100 p-4 p-xl-5 reveal">
+                                <p class="section-kicker mb-3">Kontak</p>
+                                <p class="section-copy mb-4">
+                                Saya terbuka untuk diskusi seputar frontend, pengembangan web, landing page, dan ide produk digital yang perlu diwujudkan dengan tampilan yang rapi dan fungsional.
+                            </p>
+                            <div class="contact-detail">
+                                <i class="bi bi-envelope"></i>
+                                <div>
+                                    <span>Email</span>
+                                    <a href="mailto:amsihad0@gmail.com">amsihad0@gmail.com</a>
+                                </div>
+                            </div>
+                            <div class="contact-detail">
+                                <i class="bi bi-whatsapp"></i>
+                                <div>
+                                    <span>WhatsApp</span>
+                                    <a href="https://wa.me/6283130200846" target="_blank" rel="noopener noreferrer">+62 83130200846</a>
+                                </div>
+                            </div>
+                            <div class="contact-detail">
+                                <i class="bi bi-geo-alt"></i>
+                                <div>
+                                    <span>Lokasi</span>
+                                    <p class="mb-0">Indonesia</p>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-3 mt-4">
+                                <button id="copyEmail" type="button" class="btn btn-outline-light rounded-pill px-4" data-copy="amsihad0@gmail.com">
+                                    Salin Email
+                                </button>
+                                <a class="btn btn-outline-warning rounded-pill px-4" href="mailto:amsihad0@gmail.com">Buka Email</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="form-card h-100 reveal">
+                            <div class="form-card-head">
+                                <p class="card-kicker mb-2">Kirim Pesan</p>
+                                <h3 class="h3 text-white font-display mb-2">Tulis pesan singkat</h3>
+                                <p class="text-white-50 mb-0">Pesan Anda akan dibuka di aplikasi email Anda.</p>
+                            </div>
+                            <form id="contactForm" class="row g-3 mt-1" novalidate>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="fullName">Nama Lengkap</label>
+                                    <input class="form-control" type="text" id="fullName" placeholder="Masukkan nama Anda" required>
+                                    <div class="invalid-feedback">Nama wajib diisi.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="email">Email</label>
+                                    <input class="form-control" type="email" id="email" placeholder="nama@email.com" required>
+                                    <div class="invalid-feedback">Silakan masukkan email yang valid.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="service">Topik</label>
+                                    <select class="form-select" id="service" required>
+                                        <option value="">Pilih topik</option>
+                                            <option>Permintaan Proyek</option>
+                                            <option>Diskusi Proyek</option>
+                                            <option>Masukan Portofolio</option>
+                                            <option>Kontak Umum</option>
+                                        </select>
+                                        <div class="invalid-feedback">Silakan pilih topik.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="budget">Catatan Tambahan</label>
+                                    <input class="form-control" type="text" id="budget" placeholder="Contoh: masukan untuk portofolio">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label" for="message">Pesan</label>
+                                    <textarea class="form-control" id="message" rows="5" placeholder="Tulis pesan, saran, atau pertanyaan Anda..." maxlength="300" required></textarea>
+                                    <div class="invalid-feedback">Pesan wajib diisi.</div>
+                                    <div class="message-meta">
+                                        <span>Semakin jelas pesan Anda, semakin mudah saya memahaminya.</span>
+                                        <strong id="messageCounter">0/300</strong>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex flex-wrap gap-3 align-items-center">
+                                    <button id="submitButton" class="btn btn-brand btn-lg rounded-pill px-4" type="submit">Kirim Pesan</button>
+                                    <span class="text-white-50 small">Ini akan membuka aplikasi email Anda dengan pesan terisi.</span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-wrap">
+        <div class="container py-4 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+            <p class="mb-0 text-white-50">&copy; <span id="currentYear"></span> Portofolio Shihad. Dibuat dengan fokus pada frontend, pengalaman pengguna, dan eksplorasi teknologi.</p>
+            <div class="d-flex gap-3">
+                <a href="#home" class="footer-link">Beranda</a>
+                <a href="#projects" class="footer-link">Proyek</a>
+                <a href="#contact" class="footer-link">Kontak</a>
+            </div>
+        </div>
+        <div class="container pb-4 d-flex justify-content-center gap-4">
+            <a href="https://github.com/sihad123" target="_blank" rel="noopener noreferrer" class="footer-link fs-4" aria-label="GitHub"><i class="bi bi-github"></i></a>
+            <a href="https://linkedin.com/in/sihad" target="_blank" rel="noopener noreferrer" class="footer-link fs-4" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="mailto:amsihad0@gmail.com" class="footer-link fs-4" aria-label="Email"><i class="bi bi-envelope"></i></a>
+        </div>
+    </footer>
+
+    <button id="sceneToggle" class="scene-toggle" type="button" aria-pressed="true" title="Nyalakan/matikan efek 3D">
+        <i class="bi bi-boxes"></i>
+        <span>3D Aktif</span>
+    </button>
+
+    <button id="backToTop" class="back-to-top" type="button" aria-label="Kembali ke atas">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="portfolioToast" class="toast text-bg-dark border-0" role="status" aria-live="polite" aria-atomic="true">
+            <div class="d-flex align-items-center">
+                <div class="toast-body" id="toastMessage">Aksi berhasil diselesaikan.</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Tutup"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="3d-scene.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

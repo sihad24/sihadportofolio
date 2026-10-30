@@ -1,0 +1,63 @@
+/* Mobile / Responsive overrides for smaller screens */
+
+/* General adjustments */
+@media (max-width: 992px) {
+  .hero-section { padding-top: 72px; }
+  .hero-grid { display: none !important; }
+  .orb-one, .orb-two { display: none !important; }
+  .hero-card { padding: 1.6rem !important; }
+  .profile-photo-panel, .profile-photo-panel img { min-height: 280px !important; }
+  .profile-photo-overlay { align-items: flex-start !important; flex-direction: column !important; }
+  .identity-strip { grid-template-columns: 1fr !important; }
+  .avatar-ring { width: 56px !important; height: 56px !important; font-size: 1.2rem !important; border-radius: 18px !important; }
+  .display-3 { font-size: 2rem !important; line-height: 1.08 !important; }
+  .hero-copy { font-size: 0.98rem !important; }
+  .stat-value { font-size: 1.25rem !important; }
+  .navbar-brand { font-size: 1rem !important; }
+  .hero-rotator { padding: 0.7rem 0.9rem !important; }
+  .float-chip { width: 38px !important; height: 38px !important; font-size: 1rem !important; border-radius: 12px !important; }
+  .fc-1 { top: 22px !important; left: 22px !important; }
+  .fc-2 { right: 22px !important; }
+  .fc-3 { bottom: 140px !important; left: 22px !important; }
+  .pre-cube { transform: scale(0.8); }
+}
+
+@media (max-width: 576px) {
+  .hero-section { padding-top: 64px; }
+  .display-3 { font-size: 1.6rem !important; }
+  .hero-rotator { padding: 0.5rem 0.7rem !important; }
+  .hero-social-pill span { display: none !important; }
+  .hero-social-pill { padding: 0.45rem !important; gap: 0.45rem !important; }
+  .micro-card h3, .micro-card p { font-size: 0.88rem !important; }
+  .glass-card { border-radius: 16px !important; }
+  .profile-photo-panel { border-radius: 18px !important; }
+  .profile-photo-panel, .profile-photo-panel img { min-height: 240px !important; }
+  .profile-photo-overlay strong { font-size: 1.1rem !important; }
+  .hero-badge { padding: 0.45rem 0.7rem !important; font-size: 0.72rem !important; }
+  .code-line { font-size: 0.86rem !important; }
+  .avatar-ring { width: 48px !important; height: 48px !important; font-size: 1rem !important; }
+  .hero-card::after { display: none !important; }
+  .float-chip { display: none !important; }
+  .tilt-glare { display: none !important; }
+  .pre-text { font-size: 0.66rem !important; letter-spacing: 0.3em !important; }
+  .scene-toggle span { display: none !important; }
+  .scene-toggle { padding: 0.6rem 0.7rem !important; }
+}
+
+/* Improve spacing for narrow content columns */
+@media (max-width: 768px) {
+  .container { padding-left: 1rem !important; padding-right: 1rem !important; }
+  .row.g-5 { gap: 1.25rem !important; }
+  .hero-copy, .section-copy { max-width: 48rem; }
+}
+
+/* Small fixes for navbar items to avoid overflow */
+@media (max-width: 420px) {
+  .portfolio-link { font-size: 0.92rem !important; }
+  .navbar-toggler .bi { font-size: 1.6rem !important; }
+}
+
+/* Accessibility: slightly larger tap targets */
+@media (hover: none) and (pointer: coarse) {
+  .btn, .hero-social-pill, .navbar-toggler { padding: 0.7rem 0.9rem !important; }
+}
