@@ -61,3 +61,31 @@
 @media (hover: none) and (pointer: coarse) {
   .btn, .hero-social-pill, .navbar-toggler { padding: 0.7rem 0.9rem !important; }
 }
+
+/* Hero text stays readable above the 3D planet on phones */
+@media (max-width: 767.98px) {
+  .hero-section .container::before {
+    content: "";
+    position: absolute;
+    inset: -1.5rem -1rem;
+    background: radial-gradient(ellipse at 32% 30%, rgba(4, 11, 21, 0.72), rgba(4, 11, 21, 0.38) 55%, transparent 78%);
+    border-radius: 24px;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .hero-badge,
+  .hero-kicker,
+  .hero-rotator,
+  .hero-section h1,
+  .hero-copy {
+    text-shadow: 0 2px 16px rgba(4, 11, 21, 0.85);
+  }
+
+  /* Give the fixed 3D planet more breathing room below the first screen */
+  .hero-stats,
+  .hero-badges,
+  .hero-socials {
+    position: relative;
+  }
+}
